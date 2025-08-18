@@ -22,13 +22,24 @@ print(COINS)
 FEATURE_DATA_DIR = 'feature_data'
 TRAIN_SIZE = 0.7
 
-ltd = input("Limited horizons, (Y)ay/(N)ay")
-while ltd.strip().lower() != "y" and ltd.strip().lower() != "n":
+if len(sys.argv) == 1:
     ltd = input("Limited horizons, (Y)ay/(N)ay")
-if ltd.strip().lower() == "y":
-    N_HORIZONS_TO_TEST = [ 7, 10, 15, 30, 45, 60, 75, 90]
+    while ltd.strip().lower() != "y" and ltd.strip().lower() != "n":
+        ltd = input("Limited horizons, (Y)ay/(N)ay")
+    if ltd.strip().lower() == "y":
+        N_HORIZONS_TO_TEST = [ 7, 10, 15, 30, 45, 60, 75, 90]
+    else:
+        N_HORIZONS_TO_TEST = [1, 3, 5, 7, 10, 15, 30, 45, 60, 75, 90]
 else:
-    N_HORIZONS_TO_TEST = [1, 3, 5, 7, 10, 15, 30, 45, 60, 75, 90]
+    if sys.argv[1].strip().lower() == "ltd":
+        print("limited horizons")
+        N_HORIZONS_TO_TEST = [ 7, 10, 15, 30, 45, 60, 75, 90]
+    elif sys.argv[1].strip().lower() == "all":
+        print("all horizons")
+        N_HORIZONS_TO_TEST = [1, 3, 5, 7, 10, 15, 30, 45, 60, 75, 90]
+    else:
+        print("Invalid argument. Please use 'ltd' or 'all'.")
+        sys.exit(1)
 
 CV_SPLITS = 10
 TRANSACTION_COST = 0.005
