@@ -49,7 +49,7 @@ pip3 install -r requirements.txt
 echo ""
 echo "You can:"
 echo "-Reuse the frozen feature_data used in the essay (faster, skip to experiment), OR"
-echo "-Fetch data and build features from scratch (slower, +~15 minutes)"
+echo "-Fetch data and build features from scratch (slower, + ~30 minutes)"
 
 if ask_yes_no "Reuse feature_data directory?" "Y"; then
   USE_FROZEN_FEATURES=1
@@ -59,7 +59,7 @@ fi
 
 if [[ "$USE_FROZEN_FEATURES" -eq 0 ]]; then
   echo ""
-  echo "2: Filtering assets by availability (CryptoCompare/top-500) ~30s"
+  echo "2: Filtering assets by availability (CryptoCompare/top-500) ~10s"
   python3 fetch_coins_and_filter.py
 
   echo ""

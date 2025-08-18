@@ -1,18 +1,25 @@
 # Research question
 ### To what extent do the architectural differences between a tree-based ensemble model and a decomposable additive model determine their ability to leverage market sentiment and social engagement features for cryptocurrency price forecasting?
 
-# How to reproduce the experiment 
-> Skip to Step 5 if you wish to run the experiment with data from feature_data, the exact frozen dataset used in the essay.
+# How to reproduce the experiment
+## Prerequisites
+Python 3 is required to run the workflow and CoinMarketCap API key is required to use `fetch_coins_and_filter.py` in case you want to rebuild the dataset. The use of `runner.sh` script assumes the environment is linux or macos, otherwise manual setup outlined later is required.
+## You can do it automatically via `runner.sh`, which will guide you through all the steps
+```shell
+chmod +x ./runner.sh && ./runner.sh
+```
+## OR, you can do it manually:
+> Skip to Step 5 if you wish to run the experiment with data from feature_data, the exact frozen dataset used in the essay (or your own dataset if you already downloaded it).
 1. Create the environment, install the necessary dependencies and activate it:
 ```shell
 python3 -m venv .venv && source ./.venv/bin/activate && pip3 install -r requirements.txt
 ```
-2. Run `fetch_coins_and_filter.py` to retrieve the coins that are available in CryptoCompare for all of the streams and are in top 500 by market capitalization according to CoinMarketCap. This script saves the retrieved information in `data_availability.json`. The execution time is about ~30 seconds.
+2. Run `fetch_coins_and_filter.py` to retrieve the coins that are available in CryptoCompare for all of the streams and are in top 500 by market capitalization according to CoinMarketCap. This script saves the retrieved information in `data_availability.json`. The execution time is about ~10 seconds.
    (This is the first filtering step since data availability on CryptoCompare is the greatest bottleneck)
 ```shell
 python3 fetch_coins_and_filter.py
 ```
-3. Run `market_data.py`, `price_data.py` and `social_data.py`. It is possible to run them simoultaneously and start in any order wished as these do not rely on completion of each other. Each of the scripts downloads data to its respective directory and generates a JSON report in `data_fetching_stats` directory. The execution time, if run simultaneously, is ~15 minutes.
+3. Run `market_data.py`, `price_data.py` and `social_data.py`. It is possible to run them simultaneously and start in any order wished as these do not rely on completion of each other. Each of the scripts downloads data to its respective directory and generates a JSON report in `data_fetching_stats` directory. The execution time, if run simultaneously, is ~30 minutes.
 ```shell
 python3 market_data.py
 python3 social_data.py
