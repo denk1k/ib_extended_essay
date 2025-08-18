@@ -494,7 +494,7 @@ if __name__ == "__main__":
             for model_name, metrics in models.items():
                 for metric_name, value in metrics.items():
                     cross_asset_metrics[feature_set_name][model_name][metric_name].append(value)
-    output_dir = "AI_Results_absolute"
+    output_dir = "csv_results"
     os.makedirs(output_dir, exist_ok=True)
     horizons_str = "_".join(map(str, N_HORIZONS_TO_TEST))
     mean_results_data = []
