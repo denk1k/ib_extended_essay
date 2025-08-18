@@ -3,10 +3,10 @@
 
 # How to reproduce the experiment
 ## Prerequisites
-Python 3 is required to run the workflow and CoinMarketCap API key is required to use `fetch_coins_and_filter.py` in case you want to rebuild the dataset. The use of `runner.sh` script assumes the environment is linux or macos, otherwise manual setup outlined later is required.
-## You can do it automatically via `runner.sh`, which will guide you through all the steps
+Python 3 is required to run the workflow and CoinMarketCap API key is required to use `fetch_coins_and_filter.py` in case you want to rebuild the dataset.
+## You can do it automatically via `runner.py`, which will guide you through all the steps
 ```shell
-chmod +x ./runner.sh && ./runner.sh
+python3 runner.py
 ```
 ## OR, you can do it manually:
 > Skip to Step 5 if you wish to run the experiment with data from feature_data, the exact frozen dataset used in the essay (or your own dataset if you already downloaded it).
@@ -14,12 +14,12 @@ chmod +x ./runner.sh && ./runner.sh
 ```shell
 python3 -m venv .venv && source ./.venv/bin/activate && pip3 install -r requirements.txt
 ```
-2. Run `fetch_coins_and_filter.py` to retrieve the coins that are available in CryptoCompare for all of the streams and are in top 500 by market capitalization according to CoinMarketCap. This script saves the retrieved information in `data_availability.json`. The execution time is about ~10 seconds.
+2. Run `fetch_coins_and_filter.py` to retrieve the coins that are available in CryptoCompare for all of the streams and are in top 500 by market capitalization according to CoinMarketCap. It asks for a CoinMarketCap API key. This script saves the retrieved information in `data_availability.json`. The execution time is ~10 seconds.
    (This is the first filtering step since data availability on CryptoCompare is the greatest bottleneck)
 ```shell
 python3 fetch_coins_and_filter.py
 ```
-3. Run `market_data.py`, `price_data.py` and `social_data.py`. It is possible to run them simultaneously and start in any order wished as these do not rely on completion of each other. Each of the scripts downloads data to its respective directory and generates a JSON report in `data_fetching_stats` directory. The execution time, if run simultaneously, is ~30 minutes.
+3. Run `market_data.py`, `price_data.py` and `social_data.py`. It is possible to run them simultaneously and start in any order wished as these do not rely on completion of each other. Each of the scripts downloads data to its respective directories (`market_data`, `price_data`, and `social_data`) and generates a JSON report in `data_fetching_stats` directory. The execution time, if run simultaneously, is ~30 minutes.
 ```shell
 python3 market_data.py
 python3 social_data.py
@@ -29,7 +29,7 @@ python3 price_data.py
 ```shell
 python3 create_features.py
 ```
-5. Run `experiment.py`. This is the main experimental workflow. The results are shown in the terminal and saved to the `csv_results` directory. This script first asks whether to run the experiment on limited or all horizons. The execution time is ~2 hours.
+5. Run `experiment.py`. This is the main experimental workflow, which uses data from `feature_data`. The results are shown in the terminal and saved to the `csv_results` directory. This script first asks whether to run the experiment on limited or all horizons. The execution time is ~2 hours.
 ```shell
 python3 experiment.py
 ```
@@ -37,3 +37,4 @@ python3 experiment.py
 ```shell
 python3 experiment_buy_hold.py
 ```
+
