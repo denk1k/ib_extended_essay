@@ -5,7 +5,7 @@ aiohttp==3.12.15
 ccxt==4.5.0
 pyarrow==21.0.0
 scikit-learn==1.7.1
-requests
+requests==2.32.4
 seaborn==0.13.2
 matplotlib==3.10.5
 xgboost==3.0.4

@@ -2,9 +2,9 @@
 ### To what extent do the architectural differences between a tree-based ensemble model and a decomposable additive model determine their ability to leverage market sentiment and social engagement features for cryptocurrency price forecasting?
 
 # How to reproduce the experiment
-## Prerequisites
+## Prerequisites:
 Python 3 is required to run the workflow and CoinMarketCap API key is required to use `fetch_coins_and_filter.py` in case you want to rebuild the dataset.
-## You can do it automatically via `runner.py`, which will guide you through all the steps
+## You can do it automatically via `runner.py`, which will guide you through all the steps:
 ```shell
 python3 runner.py
 ```
